@@ -1,13 +1,30 @@
-// src/app/page.tsx
+"use client";
 
-export default function Home() {
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+
+export default function SplashScreen() {
+  const router = useRouter();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      router.push('/get-started'); // redirect ke halaman get-started
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [router]);
+
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen p-8 bg-gradient-to-br from-orange-400 via-white to-blue-500">
-      <h1 className="text-4xl font-bold mb-4 text-center text-gray-800">Selamat Datang di Si KPT</h1>
-      <p className="text-lg text-center max-w-xl text-gray-700">
-        Aplikasi Booking Tempat Setda Bagian Umum. Silakan login untuk mulai melakukan pemesanan ruangan,
-        melihat agenda, dan mengelola data booking Anda.
-      </p>
+    <main className="flex flex-col items-center justify-center min-h-screen p-4 bg-gradient-to-br from-blue-600 via-blue-300 to-blue-500">
+      <Image
+        src="/images/logo.png"
+        alt="Logo Si KPT"
+        width={150}
+        height={150}
+        priority
+        className="drop-shadow-lg"
+      />
     </main>
   );
 }
